@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+
+  <style>
+    *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body{
+    background: #000;  
+}
+.container{
+    background: #000;
+    height: 100%;
+    width: 100%;
+    padding: 30px 20px;
+}
+.generator{
+
+  
+    margin: 30px auto;
+    border: 2px solid #fff;
+}
+.generator{
+    padding: 25px 20px;
+    border-radius: 30px;
+    background: #0e153a;
+
+}
+.generator h4{
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.form{
+    width: 80%;
+    margin: auto;
+    display: block;
+}
+.input-label{
+width: 100%;
+padding: 15px 15px 15px 25px;
+border: 1px solid #fff5;
+border-radius: 30px;
+position: relative;
+font-size: 16px;
+line-height: 16px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.input-label .copy{
+   background: linear-gradient(to right, #e66465, #9198e5);
+height: 100%;
+transition: all 0.5s;
+padding: 15px 30px;
+margin-left: 10px;
+border-radius: 30px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+
+transition:all 0.5s;
+
+}
+.input-label #value{
+line-break: anywhere;
+
+    line-height: 24px;
+}
+.inputs{
+    margin: 25px auto;
+    border: 1px solid #fff;
+    border-radius: 30px;
+ 
+    padding: 5px;
+    position: relative;
+  
+}
+.inputs input[type="range"]{
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #e66465, #9198e5);
+    border-radius: 5px;
+}
+.inputs input[type="range"]::-webkit-slider-thumb{
+    height: 17px;
+    appearance: none;
+    width: 17px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: linear-gradient(to right, #e66465, #9198e5);
+}
+  .inputs label{
+    display: flex;
+    padding: 10px 10px;
+    font-size: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .inputs label:has(input[type='range']){
+    padding: 15px 0px;
+  }
+  input[type="checkbox"]{
+    appearance: none;
+  width: 40px;
+  height: 22px;
+  position: relative;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.5s;
+  background: gray;
+  
+}
+input[type="checkbox"]:checked{
+    background: linear-gradient(to right, #e66465, #9198e5);
+}
+input[type="checkbox"]::before{
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: all 0.5s;
+    left: 0%;
+    top: 1px;
+}
+input[type="checkbox"]:checked:before{
+    left: calc(50%);
+}
+.btn{
+    width: 100%;
+   
+}
+.btn button{
+    background: linear-gradient(to right, #e66465, #9198e5);
+    padding: 15px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    border-radius: 30px;
+    outline: none;
+    border: 2px solid #000;
+}
+.inputs:has(input[type='range']){
+    margin-top: 5px;
+}
+div.length{
+    margin-top: 25px;
+    margin-bottom: 8px;
+}
+
+
+div.length span{
+    padding-left: 10px;
+}
+
+div.length #valuerange{
+        appearance: none;
+        background: transparent;
+        border: 0px;
+        color: #9198e5;
+        outline: none;
+       font-size: 16px;
+       width: 50px;
+}
+
+
+@media  (min-width: 1200px){
+    .generator{
+        width: 40%;
+    }
+}
+@media  (min-width: 992px) and  (max-width: 1199px){
+    .generator{
+        width: 60%;
+    }
+}
+
+@media  (min-width: 766px) and  (max-width: 991px){
+    .generator{
+        width: 80%;
+    }
+}
+@media  (max-width: 765px){
+    .generator{
+        width: 96%;
+    }
+    .input-label{
+        flex-flow: column;
+    }
+    .form{
+        width: 96%;
+    }
+    .input-label .copy{
+        margin-left: auto;
+        margin-right: auto;
+
+        margin-top: 15px;
+    }
+    .input-label #value{
+        text-align: center;
+    }
+}
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="generator">
+        <h4>Password Generator</h4>
+
+        <div class="form">
+          <div class="input-label">
+            <span id="value"></span>
+            <span class="copy" id="copy">Copy</span>
+          </div>
+
+          <div class="length">
+            <span>Length: <span ><input type="number" min="4" max="32" id="valuerange"></span></span>
+          </div>
+          <div class="inputs range">
+            <label>
+              <input type="range" id="range" min="4" value="4" max="32" />
+            </label>
+          </div>
+
+          <div class="inputs">
+            <label>
+              Include Uppercase <input type="checkbox" id="upper" checked
+            /></label>
+          </div>
+          <div class="inputs">
+            <label
+              >Include Lowercase <input type="checkbox" id="lower" 
+            /></label>
+          </div>
+          <div class="inputs">
+            <label>Include Numbers <input type="checkbox" id="number" /></label>
+          </div>
+
+          <div class="inputs">
+            <label>Include Symbols <input type="checkbox" id="symbol" /></label>
+          </div>
+
+          <div class="btn">
+          
+            <button id="genbutton">Reload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let genbutton = document.getElementById("genbutton");
+      let value = document.getElementById("value");
+      let copy = document.getElementById("copy");
+      let valuerange = document.getElementById("valuerange");
+      let upper = document.getElementById("upper");
+      let range = document.getElementById("range");
+      let lower = document.getElementById("lower");
+      let number = document.getElementById("number");
+      let symbol = document.getElementById("symbol");
+      let password = "";
+      let charset = "";
+
+
+      copy.onclick =()=>{
+        navigator.clipboard.writeText(value.innerText);
+        setTimeout(() => {
+            copy.innerText = "Copy";
+        }, 1500);
+        copy.innerText = "Copied!";
+      }
+
+      valuerange.value = range.value;
+
+
+
+      if(upper.checked){
+        charset +="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        generatePassword(charset,range.value);
+      }
+      if(lower.checked){
+        charset +="abcdefghijklmnopqrstuvwxyz";
+        generatePassword(charset,range.value);
+      }
+      if(number.checked){
+        charset +="0123456789";
+        generatePassword(charset,range.value);
+      }
+      if(symbol.checked){
+        charset +="!@#$%^&*()_+~`|}{[]:;?><,./-=";
+        generatePassword(charset,range.value);
+      }
+
+
+
+      upper.onchange=()=>{
+        checkfun();
+     
+      }
+      lower.onchange=()=>{
+        checkfun();
+      }
+      number.onchange=()=>{
+        checkfun();
+      }
+      symbol.onchange=()=>{
+        checkfun();
+      }
+      genbutton.onclick=()=>{
+        checkfun();
+      }
+
+
+
+     
+
+function generatePassword(chatter,length) {
+    password="";
+  for (let i = 0; i < length; i++) {
+    password += chatter.charAt(Math.floor(Math.random() * chatter.length));
+  }
+
+  value.innerText = password ;
+
+}
+
+
+range.oninput =()=>{
+   
+    valuerange.value = range.value;
+    generatePassword(charset,range.value);
+}
+
+valuerange.onchange =()=>{
+
+  if(valuerange.value < 4){
+    valuerange.value = 4;
+    range.value =  valuerange.value;
+  generatePassword(charset,range.value);
+  }
+
+  else if(valuerange.value > 32){
+    valuerange.value = 32;
+    range.value =  valuerange.value;
+  generatePassword(charset,range.value);
+  }
+   
+  else{
+    range.value =  valuerange.value;
+  generatePassword(charset,range.value);
+  }
+  
+
+
+
+}
+
+function checkfun(){
+    charset = "";
+       if(upper.checked){
+        charset +="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+       
+      }
+      if(lower.checked){
+        charset +="abcdefghijklmnopqrstuvwxyz";
+       
+      }
+      if(number.checked){
+        charset +="0123456789";
+        
+      }
+      if(symbol.checked){
+        charset +="!@#$%^&*()_+~`|}{[]:;?><,./-=";
+       
+      }
+
+      generatePassword(charset,range.value);
+
+      console.log(charset);
+
+    }
+
+
+
+    
+    </script>
+  </body>
+</html>
